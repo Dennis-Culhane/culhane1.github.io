@@ -18,6 +18,7 @@ function displayBio() {
 // 显示文章类别过滤器
 function displayCategoryFilter() {
     const container = document.getElementById('category-filter');
+    const articles = window.getArticlesFromStorage();
     const categories = [...new Set(articles.flatMap(article => article.categories))];
     
     container.innerHTML = `
@@ -133,6 +134,11 @@ function closeBioModal() {
 
 // 初始化页面
 document.addEventListener('DOMContentLoaded', () => {
+    // 确保数据已经初始化
+    if (!localStorage.getItem('articles')) {
+        window.saveArticlesToStorage();
+    }
+    
     displayResearchAreas();
     displayBio();
     displayCategoryFilter();
