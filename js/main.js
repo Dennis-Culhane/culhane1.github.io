@@ -46,9 +46,12 @@ function displayCategoryFilter() {
 }
 
 // 显示文章列表
-function displayArticles(filteredArticles = articles) {
+function displayArticles(filteredArticles) {
+    // 如果没有传入过滤后的文章，则从存储中获取所有文章
+    const articles = filteredArticles || window.getArticlesFromStorage();
     const container = document.getElementById('articles-list');
-    container.innerHTML = filteredArticles.map(article => `
+    
+    container.innerHTML = articles.map(article => `
         <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <h3 class="text-xl font-semibold mb-2">
                 <a href="#" class="hover:text-blue-600" onclick="showArticleModal(${article.id}); return false;">
@@ -79,6 +82,7 @@ function filterArticles(category) {
     activeBtn.classList.add('active', 'bg-blue-600', 'text-white');
     activeBtn.classList.remove('bg-gray-200');
 
+    const articles = window.getArticlesFromStorage();
     const filteredArticles = category === 'all' 
         ? articles 
         : articles.filter(article => article.categories.includes(category));
@@ -88,6 +92,7 @@ function filterArticles(category) {
 
 // 显示文章详情模态框
 function showArticleModal(articleId) {
+    const articles = window.getArticlesFromStorage();
     const article = articles.find(a => a.id === articleId);
     if (!article) return;
 
