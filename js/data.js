@@ -23,7 +23,7 @@ const articles = [
         authors: "Dennis P. Culhane, Dan Treglia, Randall Kuhn",
         date: "2023",
         categories: ["Homelessness", "Policy Analysis"],
-        abstract: "This paper examines the effectiveness of homelessness prevention programs and their impact on reducing housing instability among vulnerable populations...",
+        abstract: "This paper examines the effectiveness of homelessness prevention programs...",
         pdfUrl: `${GITHUB_REPO_URL}/papers/homelessness-prevention-2023.pdf`
     },
     {
@@ -32,8 +32,42 @@ const articles = [
         authors: "Dennis P. Culhane, John Fantuzzo",
         date: "2022",
         categories: ["Integrated Data Systems", "Policy Analysis"],
-        abstract: "A comprehensive review of integrated data systems and their role in informing social policy decisions...",
+        abstract: "A comprehensive review of integrated data systems...",
         pdfUrl: `${GITHUB_REPO_URL}/papers/integrated-data-2022.pdf`
+    },
+    {
+        id: 3,
+        title: "Housing First for People with Severe Mental Illness",
+        authors: "Dennis P. Culhane, Stephen Metraux",
+        date: "2023",
+        categories: ["Housing Policy", "Social Policy"],
+        abstract: "An evaluation of Housing First programs for individuals with severe mental illness...",
+        pdfUrl: `${GITHUB_REPO_URL}/papers/housing-first-2023.pdf`
+    },
+    {
+        id: 4,
+        title: "Youth Homelessness: Patterns and Interventions",
+        authors: "Dennis P. Culhane, Matthew Morton",
+        date: "2022",
+        categories: ["Homelessness", "Social Policy"],
+        abstract: "A comprehensive analysis of youth homelessness patterns and effective interventions...",
+        pdfUrl: `${GITHUB_REPO_URL}/papers/youth-homelessness-2022.pdf`
     }
-    // 你可以继续添加更多文章...
-]; 
+];
+
+// 添加本地存储功能
+function saveArticlesToStorage() {
+    localStorage.setItem('articles', JSON.stringify(articles));
+}
+
+function getArticlesFromStorage() {
+    const storedArticles = localStorage.getItem('articles');
+    return storedArticles ? JSON.parse(storedArticles) : articles;
+}
+
+// 初始化存储
+saveArticlesToStorage();
+
+// 导出函数供 admin.js 使用
+window.saveArticlesToStorage = saveArticlesToStorage;
+window.getArticlesFromStorage = getArticlesFromStorage;
